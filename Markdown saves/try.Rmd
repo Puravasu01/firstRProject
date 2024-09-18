@@ -1,0 +1,118 @@
+---
+title: "Assignment 1"
+author: "Puravasu Jaideep Sesha"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### 1. Data Frame and 4. Data Frame in Markdown
+
+```{r dataframe}
+animals <- c("Snake", "Ostrich", "Cat", "Spider")
+num_legs <- c(0,2,4,8)
+animals_df <- data.frame(animals, num_legs)
+animals_df
+```
+
+Data types -> animals - chr, num_legs- num
+
+### 2. Check and Delete Objects
+```{r check_delete_objects}
+ls()
+rm(num_legs)
+ls()
+rm(list = ls())
+ls()
+```
+
+### 3. R Script Dataframe
+```{r script_df}
+#### MyFirstRScript.R
+animals <- c("Snake", "Ostrich", "Cat", "Spider")
+num_legs <- c(0,2,4,8)
+animals_df <- data.frame(animals, num_legs)
+animals_df
+```
+source("D:/Bristol Uni/RStudio/R Markdown save spot/Script save spot/myFirstRScript.R")
+
+### 5. Matrix
+
+#### X, Y, Z
+```{r matrix}
+x_vect <- c(seq(12,2, by = -2))
+x_vect
+X <- matrix(x_vect, 2, 3)
+X
+Y <- matrix(seq(4), 2,2)
+Y
+Z <- matrix(seq(4,10, by=2), 2, 2)
+Z
+```
+
+#### Transpose
+```{r transpose}
+t(Y)
+t(Z)
+```
+
+#### Addition
+```{r addition}
+Y + Z
+Z + Y
+```
+Matrix addition is 'Commutative'.
+
+#### Multiplication
+```{r multiplication}
+Y %*% Z
+Z %*% Y
+```
+Matrix multiplication is not commutative.
+```{r multiplication2}
+Y %*% X
+#X %*% Y
+```
+Error is due to mismatch in order. X is 2(p)x3(q), Y is 2(r)x2(s). For matrix multiplication to work, q should be equal to r.
+
+#### Element-wise multiplication
+```{r element_multiplication}
+Y * Z
+Z * Y
+```
+Commutative
+
+#### Inverse
+```{r inverse}
+solve(Y)
+Y * solve(Y)
+solve(Y) * Y
+```
+Identity Matrix
+
+### 6. Writing a function
+```{r function}
+myFirstRFunc <- function(n) {
+  if(n<0 || n != as.integer(n) || !is.numeric(n)){
+    stop("Invalid! Enter an integer")
+  }
+  else {
+    sum <- 0
+    for(i in 1:n-1){
+      if(i %% 2 ==0 || i %% 7 == 0){
+        sum <- sum + i
+      }
+    }
+  }
+  return(sum)
+  }
+```
+myFirstRFunc(14) \
+[1] 49 \
+myFirstRFunc(1000) \
+[1] 284787 \
+myFirstRFunc(1.25) \
+Error in myFirstRFunc(1.25) : Invalid! Enter an integer
